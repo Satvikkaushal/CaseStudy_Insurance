@@ -161,7 +161,7 @@ export default function Table() {
               editable={{
                 onRowUpdate: (newData, oldData) =>
                   new Promise((resolve, reject) => {
-                    if (newData.Premium > 1000000) {
+                    if (parseInt(newData.Premium) > 1000000) {
                       SetError("Premium more than 1 million is allowed");
                       resolve();
                     } else {
