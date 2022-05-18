@@ -12,10 +12,10 @@ dotenv.config();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   next();
-// });
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 app.use("/api", dataRoutes);
 
 const Mongo_URL = process.env.MONGO_URL;
@@ -30,8 +30,8 @@ mongoose
   .then(() => {
     console.log("Connected to the database ");
   })
-//   .then(() => mongoose.connection.db.dropDatabase())
-//   .then(() => csvToDbService.loadDataToDb())
+  .then(() => mongoose.connection.db.dropDatabase())
+  .then(() => csvToDbService.loadDataToDb())
   .catch((err) => {
     console.error(`Error connecting to the database.${err}`);
   });
